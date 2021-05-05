@@ -1,0 +1,168 @@
+---
+title: "Survey_results"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(stringr)
+library(cld3)
+library(stringi)
+```
+
+```{r}
+survey_orig <- read_csv("survey_59.csv")
+
+survey_orig %>%
+  select(2) %>%
+  mutate_all(as.factor) %>%
+  rename("question_1" = colnames(survey_orig[2])) %>%
+  ggplot(aes(question_1)) +
+  geom_histogram(stat = "count") +
+  theme(axis.text.x = element_text(angle = 0))
+
+survey_long <- survey_orig %>%
+  select(-Zeitstempel) %>%
+  pivot_longer(cols = 1:20, names_to = "book", values_to = "recommendation") %>%
+  arrange(book)
+
+
+books <- str_split(survey_long$book, " -  ", simplify = TRUE) %>%
+  as.data.frame() %>% 
+  rename("author" = V1, "title" = V2)
+
+recommendation <- str_split(survey_long$recommendation, " - ", simplify = TRUE) %>%
+  as.data.frame() %>% 
+  select(-V3) %>% 
+  rename("recommendation_author" = V1, "recommendation_title" = V2)
+
+survey <- cbind(books, recommendation)
+
+
+```
+
+```{r}
+eval_list <- read_delim("/Users/Tobitie/Google Drive/Uni/Master/4. Semester/Data Mining Cup/Evaluvaluation Set_v1.csv", delim =";")
+colnames(eval_list) <- tolower(colnames(eval_list)) 
+#eval_list <- eval_list %>% rename("title" = "title_option")
+
+survey$title = str_remove(survey$title, "^ ")
+survey$recommendation_title = str_remove(survey$recommendation_title, "^ ")
+
+#colnames(eval_list)[4] <- "title_option"
+
+
+survey_full <- left_join(survey, eval_list)
+
+
+# how often is same author chosen?
+same_author = c()
+for(i in 1:20){
+  temp <- full_join(test,test2) %>%
+    filter(ordner == i) %>%
+    distinct(author) %>%
+    nrow()
+  same_author <- cbind(same_author, temp)
+}
+same_author <- as.data.frame(same_author)
+colnames(same_author) <- 1:20
+
+same_author <- as.data.frame(same_author) %>% pivot_longer(cols = 1:20, names_to = "ordner", values_to = "distinct_authors") %>% mutate(ordner = as.double(ordner))
+
+survey_full <- left_join(survey_full, same_author)
+
+survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 3) %>% mutate(same_author = ifelse(author == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if exactly one of same author is available")
+
+survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 2) %>% mutate(same_author = ifelse(author == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if two one of same author is available")
+
+
+# detect if language is same
+book_language <- detect_language(eval_list$title) %>%
+  as.data.frame() %>%
+  rename("language" = ".")
+
+#manually fixing errors and combining data frames
+language_fixed <- cbind(eval_list, book_language) %>% select(author, title, language)
+language_fixed[7,3] <- "de"
+language_fixed[10,3] <- "de"
+language_fixed[11,3] <- "en"
+language_fixed[12,3] <- "en"
+language_fixed[18,3] <- "de"
+language_fixed[19,3] <- "de"
+language_fixed[22,3] <- "en"
+language_fixed[24,3] <- "de"
+language_fixed[25,3] <- "en"
+language_fixed[26,3] <- "en"
+language_fixed[27,3] <- "fr"
+language_fixed[28,3] <- "de"
+language_fixed[29,3] <- "en"
+language_fixed[30,3] <- "en"
+language_fixed[32,3] <- "en"
+language_fixed[33,3] <- "en"
+language_fixed[35,3] <- "en"
+language_fixed[36,3] <- "en"
+language_fixed[37,3] <- "de"
+language_fixed[39,3] <- "de"
+language_fixed[40,3] <- "de"
+language_fixed[41,3] <- "en"
+language_fixed[42,3] <- "en"
+language_fixed[43,3] <- "en"
+language_fixed[51,3] <- "en"
+language_fixed[53,3] <- "en"
+language_fixed[56,3] <- "en"
+language_fixed[60,3] <- "en"
+language_fixed[61,3] <- "en"
+language_fixed[63,3] <- "en"
+language_fixed[69,3] <- "en"
+language_fixed[75,3] <- "en"
+language_fixed[77,3] <- "es"
+language_fixed[78,3] <- "en"
+
+
+survey_full <- left_join(survey_full, language_fixed) %>% rename("language_book" = "language")
+
+# find language of the title chosen as best recommender
+rec_title <- survey_full %>%
+  select(recommendation_title) %>%
+  distinct(recommendation_title) 
+language_recommendation <- detect_language(rec_title$recommendation_title) %>%
+  as.data.frame() %>% 
+  rename("language_recommendation" = ".")
+rec_title <- cbind(rec_title, language_recommendation)
+
+rec_title$language_recommendation <- c("de","de", NA, "de", "de", "de", "de", "de","de", "de", "es", "es", "es", "de", "fr", "en", "fr", "de", "en", "de","en","en","en","en","en","en","en","en","de","de","de","de","de","de","en","de","en","de","en","en","en","de","fr", "en","en","en","en","de","en","en","en","de","en","en","en","de","de","de","de","en","de")
+
+
+survey_full <- merge(survey_full, rec_title) %>%
+  select(author, title, recommendation_title,recommendation_author:language_recommendation) %>%
+  arrange(ordner)
+
+eval_list <- cbind(eval_list,"language" = language_fixed[,"language"])
+
+# Create column with number of distinct languages for each of the 20 questions
+unique_languages = c()
+for(i in 1:20){
+  temp <- eval_list %>% 
+    filter(ordner == i) %>%
+    distinct(language) %>%
+    nrow()
+  unique_languages <- append(unique_languages, temp)
+}
+unique_languages <- data.frame(ordner = 1:20, as.data.frame(unique_languages))
+
+
+survey_full <- merge(survey_full, unique_languages)
+survey_full <- survey_full %>% mutate(same_language = ifelse(language_book == language_recommendation, "same_language", "different_language"))
+
+survey_full %>% filter(unique_languages > 1)  %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + labs(title = "choice behavior when 2+ languages are available")
+
+survey_full %>% filter(distinct_authors == 4 & unique_languages > 1) %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + labs(title = "choice behavior when 2+ languages are available and no same authors")
+
+```
+
+
