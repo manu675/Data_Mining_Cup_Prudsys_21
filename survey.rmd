@@ -47,7 +47,12 @@ survey <- cbind(books, recommendation)
 ```
 
 ```{r}
-eval_list <- read_delim("/Users/Tobitie/Google Drive/Uni/Master/4. Semester/Data Mining Cup/Evaluvaluation Set_v1.csv", delim =";")
+path_sam <- "/Users/samuelpflueger/SynologyDrive/01_Uni/02_Master/03_Semester/05_SS21/20_Data_Mining_Seminar/R/Analysis/Eval_Survey_Kopie.csv"
+
+path_tobi <- "/Users/Tobitie/Google Drive/Uni/Master/4. Semester/Data Mining Cup/Evaluvaluation Set_v1.csv"
+
+eval_list <- read_delim(path_sam, delim =";")
+#eval_list2 <- read_csv(file = path_sam)
 colnames(eval_list) <- tolower(colnames(eval_list)) 
 #eval_list <- eval_list %>% rename("title" = "title_option")
 
@@ -57,13 +62,14 @@ survey$recommendation_title = str_remove(survey$recommendation_title, "^ ")
 #colnames(eval_list)[4] <- "title_option"
 
 
-survey_full <- left_join(survey, eval_list)
-
+survey_full <- left_join(survey, eval_list, by = c("title"))
+survey_full <- left_join(survey, eval_list %>% select(itemid, title), by = c("recommendation_title" = "title")) %>% 
+  rename(itemid_rec = itemid)
 
 # how often is same author chosen?
 same_author = c()
 for(i in 1:20){
-  temp <- full_join(test,test2) %>%
+  temp <- full_join(survey_full,eval_list) %>%
     filter(ordner == i) %>%
     distinct(author) %>%
     nrow()
@@ -76,9 +82,9 @@ same_author <- as.data.frame(same_author) %>% pivot_longer(cols = 1:20, names_to
 
 survey_full <- left_join(survey_full, same_author)
 
-survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 3) %>% mutate(same_author = ifelse(author == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if exactly one of same author is available")
+survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 3) %>% mutate(same_author = ifelse(author.x == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if exactly one of same author is available")
 
-survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 2) %>% mutate(same_author = ifelse(author == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if two one of same author is available")
+survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 2) %>% mutate(same_author = ifelse(author.x == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if two one of same author is available")
 
 
 # detect if language is same
@@ -164,5 +170,32 @@ survey_full %>% filter(unique_languages > 1)  %>% ggplot(aes(same_language)) + g
 survey_full %>% filter(distinct_authors == 4 & unique_languages > 1) %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + labs(title = "choice behavior when 2+ languages are available and no same authors")
 
 ```
+## Sam
+
+# How many recommendations have the same category as the book?
+s1 <- survey_full
+
+s1 <- left_join(s1, eval_list %>% select(title, itemid), by = c("itemid_rec" = "itemid")) %>% 
+  rename(topic = topic.x, topic_rec = topic.y)
+
+s1 <- s1 %>% mutate(same_category = ifelse(topic == topic_rec, "yes", "no"))
+
+s1 %>% filter(is.na(topic_rec)) %>% group_by(recommendation_author) %>% count
+
+s1 %>% ggplot(aes(same_category)) + 
+  geom_histogram(stat = "count")
+  #labs(title = "choice behavior when 2+ languages are available")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
