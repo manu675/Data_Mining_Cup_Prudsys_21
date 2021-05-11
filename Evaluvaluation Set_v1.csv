@@ -1,0 +1,81 @@
+﻿ID;itemID;Author;Title;Topic;Type;Reference;Main Color;Ordner;Question
+1;14314;George R.R. Martin;Das Lied von Eis und Feuer 04. Die Saat des goldenen Löwen;FYT;Test;;beige/brown;1;George R.R. Martin -  Das Lied von Eis und Feuer 04. Die Saat des goldenen Löwen
+2;77255;George R.R. Martin;Das Lied von Eis und Feuer 05. Sturm der Schwerter;FYT;Suggestion;14314;beige/brown;1;George R.R. Martin -  Das Lied von Eis und Feuer 05. Sturm der Schwerter
+3;4833;George R.R. Martin;Das Lied von Eis und Feuer 06. Die Königin der Drachen;FYT;Suggestion;14314;beige/brown;1;George R.R. Martin -  Das Lied von Eis und Feuer 06. Die Königin der Drachen
+4;25971;George R.R. Martin;Das Lied von Eis und Feuer 03. Der Thron der Sieben Königreiche;FYT;Suggestion;14314;beige/brown;1;George R.R. Martin -  Das Lied von Eis und Feuer 03. Der Thron der Sieben Königreiche
+5;24486;Alex Spohr;Der Pfad des Wolfes (Neuauflage);FM;Test;;blue;2;Alex Spohr -  Der Pfad des Wolfes (Neuauflage)
+6;63081;Alex Spohr;Rüstkammer des Dornenreiches;FM;Suggestion;24486;blue;2;Alex Spohr -  Rüstkammer des Dornenreiches
+7;34217;J. R. Ward;Ewig geliebt;FMR;Suggestion;24486;purple;2;J. R. Ward -  Ewig geliebt
+8;73628;Wolfgang Hohlbein;Die Töchter des Drachen/Der Thron der Libelle;FM;Suggestion;24486;black;2;Wolfgang Hohlbein -  Die Töchter des Drachen/Der Thron der Libelle
+9;67909;J. R. R. Tolkien;The Lord of the Rings;FM;Test;;red;3;J. R. R. Tolkien -  The Lord of the Rings
+10;15581;J. R. R. Tolkien;Der Herr der Ringe;FMB;Suggestion;67909;blue;3;J. R. R. Tolkien -  Der Herr der Ringe
+11;8893;Terry Pratchett;Pyramids;FM;Suggestion;67909;red;3;Terry Pratchett -  Pyramids
+12;38171;Noel Green;Advanced Potion Making;FL;Suggestion;67909;green;3;Noel Green -  Advanced Potion Making
+13;13772;Antoine de Saint-Exupery;Le Petit Prince;YF;Test;;white;4;Antoine de Saint-Exupery -  Le Petit Prince
+14;42149;Jean-Jacques Sempe, Rene Goscinny;Les vacances du petit Nicolas;YF;Suggestion;13772;blue;4;Jean-Jacques Sempe, Rene Goscinny -  Les vacances du petit Nicolas
+15;28318;Christine Nöslinger;Der Zwerg im Kopf;YF;Suggestion;13772;yellow;4;Christine Nöslinger -  Der Zwerg im Kopf
+16;2428;Jeff Kinney;Diary of a Wimpy Kid 14. Wrecking Ball;YF;Suggestion;13772;grey;4;Jeff Kinney -  Diary of a Wimpy Kid 14. Wrecking Ball
+17;12519;Alexander A. Bogdanow;Der rote Planet;FB;Test;;red;5;Alexander A. Bogdanow -  Der rote Planet
+18;6585;Conan Doyle;Die verlorene Welt;FB;Suggestion;12519;grey;5;Conan Doyle -  Die verlorene Welt
+19;29093;Heinz Körner;Engelsfeuer;FB;Suggestion;12519;blue;5;Heinz Körner -  Engelsfeuer
+20;39074;H. G. Wells;Krieg der Welten;FB;Suggestion;12519;red;5;H. G. Wells -  Krieg der Welten
+21;27903;Terry Pratchett;Die Nachtwächter;FBA;Test;;black;6;Terry Pratchett -  Die Nachtwächter
+22;35014;Terry Pratchett;The Light Fantastic;FM;Suggestion;27903;blue;6;Terry Pratchett -  The Light Fantastic
+23;31382;Terry Pratchett;Kleine freie Männer;FBA;Suggestion;27903;beige/brown;6;Terry Pratchett -  Kleine freie Männer
+24;67955;Tamara Glück;Goldmond;FBA;Suggestion;27903;black;6;Tamara Glück -  Goldmond
+25;11609;John Marrs;The Passengers;FLP;Test;;black;7;John Marrs -  The Passengers
+26;75647;Philip K. Dick;Blade Runner;FLP;Suggestion;11609;black;7;Philip K. Dick -  Blade Runner
+27;54020;Jean-Francois Marival;La Mémoire interdite;FLP;Suggestion;11609;black;7;Jean-Francois Marival -  La Mémoire interdite
+28;47380;Stanislaw Lem;Provokationen;FLP;Suggestion;11609;purple;7;Stanislaw Lem -  Provokationen
+29;8861;Erin Hunter;Island of Shadows;YFC;Test;;orange;8;Erin Hunter -  Island of Shadows
+30;55927;Erin Hunter;Broken Pride;YFH;Suggestion;8861;orange;8;Erin Hunter -  Broken Pride
+31;78279;Robert Muchamore;The General;YFC;Suggestion;8861;black;8;Robert Muchamore -  The General
+32;12568;Meagan Spooner;Hunted;YFC;Suggestion;8861;white;8;Meagan Spooner -  Hunted
+33;62060;Guy Haley;Warhammer 4000 - Belisarius Cawl;FLQ;Test;;brown;9;Guy Haley -  Warhammer 4000 - Belisarius Cawl
+34;70728;James Dashner;Maze Runner 01. Die Auserwählten - Im Labyrinth;FLQ;Suggestion;62060;green;9;James Dashner -  Maze Runner 01. Die Auserwählten - Im Labyrinth
+35;52981;JK Franks;Kingdoms of Sorrow;FLQ;Suggestion;62060;brown;9;JK Franks -  Kingdoms of Sorrow
+36;71352;J. S. Morin;Extinction Reversed;FLQ;Suggestion;62060;blue;9;J. S. Morin -  Extinction Reversed
+37;72826;Andreas Abato;Mandalas Weihnachten;YFB;Test;;yellow;10;Andreas Abato -  Mandalas Weihnachten
+38;7294;Henry Carroll;So machst du richtig coole Kunst;YNA;Suggestion;72826;red;10;Henry Carroll -  So machst du richtig coole Kunst
+39;74960;Erik Ronholt;Papierflieger;YNPH;Suggestion;72826;blue;10;Erik Ronholt -  Papierflieger
+40;78303;Loewe Verlag;Mandala-Licherzauber Fabelwesen;YNA;Suggestion;72826;dark blue;10;Loewe Verlag -  Mandala-Licherzauber Fabelwesen
+41;47632;R. E. Close;JENN;FL;Test;;black;11;R. E. Close -  JENN
+42;28933;R. E. Close;White Witch;FL;Suggestion;47632;blue;11;R. E. Close -  White Witch
+43;40699;R. E. Close;ACHIRD;FM;Suggestion;47632;black;11;R. E. Close -  ACHIRD
+44;18953;Michael Weisser;OFFSHORE;FL;Suggestion;47632;blue;11;Michael Weisser -  OFFSHORE
+45;3959;NA;SCHLEICH® Horse Club - Rätselblock für Pferdefans;YBG;Test;;green;12;NA -  SCHLEICH® Horse Club - Rätselblock für Pferdefans
+46;4836;NA;SCHLEICH® Horse Club - Von Punkt zu Punkt;YBG;Suggestion;3959;green;12;NA -  SCHLEICH® Horse Club - Von Punkt zu Punkt
+47;5022;NA;SCHLEICH® Horse Club - Eine gelungene Überraschung;YFM;Suggestion;3959;green;12;NA -  SCHLEICH® Horse Club - Eine gelungene Überraschung
+48;72603;Ralf Butschkow;Ich hab einen Freund, der ist Astronaut;YBCS;Suggestion;3959;blue;12;Ralf Butschkow -  Ich hab einen Freund, der ist Astronaut
+49;22622;Esphyr Slobodkina;Caps for Sale: A Tale of a Peddler, Some Monkeys and Their Monkey Business;YFA;Test;;blue;13;Esphyr Slobodkina -  Caps for Sale: A Tale of a Peddler, Some Monkeys and Their Monkey Business
+50;177;Esphyr Slobodkina;Circus Caps for Sale;YFQ;Suggestion;22622;grey;13;Esphyr Slobodkina -  Circus Caps for Sale
+51;75972;Frank Cottrell Boyce;Desirable;YFQ;Suggestion;22622;green;13;Frank Cottrell Boyce -  Desirable
+52;36021;Andy Stanton;Mr Gum and the Cherry Tree;YFQ;Suggestion;22622;red;13;Andy Stanton -  Mr Gum and the Cherry Tree
+53;63457;Deepa Agarwal;Mahabharata Stories;YFJ;Test;;orange;14;Deepa Agarwal -  Mahabharata Stories
+54;59843;Tad Williams;Brothers of the Wind;FMB;Suggestion;63457;black;14;Tad Williams -  Brothers of the Wind
+55;39152;Gustav Schwab;Griechische Sagen;YFJ;Suggestion;63457;orange;14;Gustav Schwab -  Griechische Sagen
+56;53528;Katie O'Neill;Princess Princess Ever After;XQM;Suggestion;63457;brown;14;Katie O'Neill -  Princess Princess Ever After
+57;47684;Anna Zaires, Dima Zales;Der X-Klub (Eine Krinar Erzählung);FR;Test;;dark blue;15;Anna Zaires, Dima Zales -  Der X-Klub (Eine Krinar Erzählung)
+58;22484;Lutz van Dijk;Verdammt starke Liebe;FJMS;Suggestion;47684;brown;15;Lutz van Dijk -  Verdammt starke Liebe
+59;52878;Aloysius Bertrand;Gaspard de la Nuit;FM;Suggestion;47684;white;15;Aloysius Bertrand -  Gaspard de la Nuit
+60;30953;Wendy Froud, Brian Froud;Brian Froud's Faeries' Tales;FM;Suggestion;47684;dark green;15;Wendy Froud, Brian Froud -  Brian Froud's Faeries' Tales
+61;40279;Keegan Nielsen;Thir13en;FL;Test;;red;16;Keegan Nielsen -  Thir13en
+62;51397;Jay Asher;13 Reasons Why;YXGS;Suggestion;40279;dark blue;16;Jay Asher -  13 Reasons Why
+63;45278;Brandon Sanderson;Rhythm of War - The Stormlight Archive 04;FM;Suggestion;40279;dark blue;16;Brandon Sanderson -  Rhythm of War - The Stormlight Archive 04
+64;75904;Margaret Atwood;The Testaments;JBSF11;Suggestion;40279;green;16;Margaret Atwood -  The Testaments
+65;17138;Felicity Brooks;Meine kleine Stickerwelt: Züge, Lastwagen und Traktoren;YBG;Test;;yellow;17;Felicity Brooks -  Meine kleine Stickerwelt: Züge, Lastwagen und Traktoren
+66;13855;Sven Nordqvist;Das große Bastelbuch für kreative Entdecker;YBG;Suggestion;17138;blue;17;Sven Nordqvist -  Das große Bastelbuch für kreative Entdecker
+67;41545;Fiona Watt;Mein Stickerbuch: Bei den alten Griechen;YBG;Suggestion;17138;brown;17;Fiona Watt -  Mein Stickerbuch: Bei den alten Griechen
+68;67781;Fiona Watt;Mein Anziehpuppen-Stickerbuch: Meerjungfrauen;YBG;Suggestion;17138;blue;17;Fiona Watt -  Mein Anziehpuppen-Stickerbuch: Meerjungfrauen
+69;53672;Penelope Dyan;Classy Nancy--A One Of A Kind Girl;YFQ;Test;;turquoise;18;Penelope Dyan -  Classy Nancy--A One Of A Kind Girl
+70;34198;Penelope Dyan;Bubble Trouble---For Boys Only (R);YNMH;Suggestion;53672;blue;18;Penelope Dyan -  Bubble Trouble---For Boys Only (R)
+71;7312;Alvin Schwartz;There Is a Carrot in My Ear and Other Noodle Tales;YFQ;Suggestion;53672;blue;18;Alvin Schwartz -  There Is a Carrot in My Ear and Other Noodle Tales
+72;35194;Jakob M. Leonhardt;Knapp vorbei ist auch daneben;YFQ;Suggestion;53672;brown;18;Jakob M. Leonhardt -  Knapp vorbei ist auch daneben
+73;71112;Marnie Reynolds-Bourque;The Watering Can;YFB;Test;;brown;19;Marnie Reynolds-Bourque -  The Watering Can
+74;34844;Morgan Michelle;Toby Turtle and the Underwater Crew;YFB;Suggestion;71112;blue;19;Morgan Michelle -  Toby Turtle and the Underwater Crew
+75;1713;Stella Tack;Kiss Me Twice - Kiss the Bodyguard 2;YFM;Suggestion;71112;blue;19;Stella Tack -  Kiss Me Twice - Kiss the Bodyguard 2
+76;71508;Andrea Küssner-Neubert;Das Ausschneide-Bastelbuch - Kleine Unterwasserwelt;YNN;Suggestion;71112;blue;19;Andrea Küssner-Neubert -  Das Ausschneide-Bastelbuch - Kleine Unterwasserwelt
+77;58566;Anna Dewdney;La Llama Llama Rojo Pijama (Spanish Language Edition);YBLJ;Test;;blue;20;Anna Dewdney -  La Llama Llama Rojo Pijama (Spanish Language Edition)
+78;19714;Anna Dewdney;Llama Llama y su Pijama Roja = Llama Llama and the Lucky Pajamas;YFZZ;Suggestion;58566;red;20;Anna Dewdney -  Llama Llama y su Pijama Roja = Llama Llama and the Lucky Pajamas
+79;77527;E. L. Konigsburg;Dos Ninos y Un Angel En Nueva York;YF;Suggestion;58566;white;20;E. L. Konigsburg -  Dos Ninos y Un Angel En Nueva York
+80;69030;Margaret Salter;'por Qué No Puedo Dormir?;YBLJ;Suggestion;58566;purple;20;Margaret Salter -  'por Qué No Puedo Dormir?
