@@ -41,11 +41,11 @@ survey <- cbind(books, recommendation)
 ```{r}
 # Prepare data ----------------------------------------------------------------------------------------------------
 
-#path_sam <- "/Users/samuelpflueger/SynologyDrive/01_Uni/02_Master/03_Semester/05_SS21/20_Data_Mining_Seminar/R/Analysis/Eval_Survey_Kopie.csv"
+path_sam <- "/Users/samuelpflueger/SynologyDrive/01_Uni/02_Master/03_Semester/05_SS21/20_Data_Mining_Seminar/R/Analysis/Eval_Survey_Kopie.csv"
 
 path_tobi <- "/Users/Tobitie/Google Drive/Uni/Master/4. Semester/Data Mining Cup/Evaluvaluation Set_v1.csv"
 
-eval_list <- read_delim(path_tobi, delim =";")
+eval_list <- read_delim(path_sam, delim =";")
 #eval_list2 <- read_csv(file = path_sam)
 colnames(eval_list) <- tolower(colnames(eval_list)) 
 #eval_list <- eval_list %>% rename("title" = "title_option")
@@ -55,8 +55,9 @@ survey$recommendation_title = str_remove(survey$recommendation_title, "^ ")
 
 #colnames(eval_list)[4] <- "title_option"
 
-
-survey_full <- left_join(survey, eval_list, by = c("title")) %>% rename(itemid_rec = itemid)
+survey_full <- 0
+survey_full <- left_join(survey, eval_list %>% select(-author, -question, -reference), by = c("title"))
+survey_full <- left_join(survey_full, eval_list %>% select(title, itemid), by = c("recommendation_title"="title")) %>% rename(itemid_rec = itemid.y, itemid = itemid.x)
 #survey_full <- left_join(survey, eval_list, by = c("recommendation_title" = "title")) %>% 
   #rename(itemid_rec = itemid)
 
@@ -267,8 +268,24 @@ s1 %>% ggplot(aes(same_category)) +
 
 
 
+## cover similarity
+survey_color <- survey_full %>% select(ordner, itemid, `main color`, itemid_rec) %>% left_join(
+  eval_list %>% select(itemid, `main color`), by = c("itemid_rec" = "itemid"))
 
+#plot color similarity counts for all 20 questions
+survey_color %>% group_by(ordner) %>% 
+  summarise(same_color = if_else(`main color.x` == `main color.y`, "yes", "no")) %>% 
+  group_by(ordner, same_color) %>% count() %>% 
+  ggplot(aes(same_color, n))+
+  geom_col()+
+  facet_wrap(vars(ordner))
+# questions with no obvious choice: 4,5,7,9,14,15,16,19ss
 
+survey_color %>% group_by(ordner, itemid_rec) %>% 
+  count() %>% #filter(ordner == 1) %>% 
+  ggplot(aes(as.factor(itemid_rec), n))+
+  geom_col()+
+  facet_wrap(vars(ordner), drop = TRUE)
 
 
 
