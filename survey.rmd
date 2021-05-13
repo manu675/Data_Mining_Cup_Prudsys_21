@@ -18,14 +18,6 @@ library(stringi)
 ```{r}
 survey_orig <- read_csv("survey_59.csv")
 
-survey_orig %>%
-  select(2) %>%
-  mutate_all(as.factor) %>%
-  rename("question_1" = colnames(survey_orig[2])) %>%
-  ggplot(aes(question_1)) +
-  geom_histogram(stat = "count") +
-  theme(axis.text.x = element_text(angle = 0))
-
 survey_long <- survey_orig %>%
   select(-Zeitstempel) %>%
   pivot_longer(cols = 1:20, names_to = "book", values_to = "recommendation") %>%
@@ -47,6 +39,8 @@ survey <- cbind(books, recommendation)
 ```
 
 ```{r}
+# Prepare data ----------------------------------------------------------------------------------------------------
+
 #path_sam <- "/Users/samuelpflueger/SynologyDrive/01_Uni/02_Master/03_Semester/05_SS21/20_Data_Mining_Seminar/R/Analysis/Eval_Survey_Kopie.csv"
 
 path_tobi <- "/Users/Tobitie/Google Drive/Uni/Master/4. Semester/Data Mining Cup/Evaluvaluation Set_v1.csv"
@@ -66,6 +60,8 @@ survey_full <- left_join(survey, eval_list, by = c("title")) %>% rename(itemid_r
 #survey_full <- left_join(survey, eval_list, by = c("recommendation_title" = "title")) %>% 
   #rename(itemid_rec = itemid)
 
+
+# Author preparation --------------------------------------------------------------------------------------------------
 # how often is same author chosen?
 same_author = c()
 for(i in 1:20){
@@ -80,13 +76,14 @@ colnames(same_author) <- 1:20
 
 same_author <- as.data.frame(same_author) %>% pivot_longer(cols = 1:20, names_to = "ordner", values_to = "distinct_authors") %>% mutate(ordner = as.double(ordner))
 
-survey_full <- left_join(survey_full, same_author, by = "ordner")
+survey_full <- left_join(survey_full, same_author, by = "ordner") # ordner 12 missing because no title for those books - add manually
 
-survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 3) %>% mutate(same_author = ifelse(author.x == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if exactly one of same author is available")
+survey_full[(which(is.na(survey_full[,"ordner"]))),"ordner"] <- 12
 
-survey_full %>% select(-reference) %>% na.omit() %>% filter(distinct_authors == 2) %>% mutate(same_author = ifelse(author.x == recommendation_author,"same author", "different author")) %>% ggplot(aes(same_author)) + geom_histogram(stat = "count") + labs(title = "how often is same author chosen if two one of same author is available")
+# Create same author column
+survey_full$same_author <- ifelse(survey_full$author.x == survey_full$recommendation_author, "same_author", "different_author")
 
-
+# Language preparation --------------------------------------------------------------------------------------------------
 # detect if language is same
 book_language <- detect_language(eval_list$title) %>%
   as.data.frame() %>%
@@ -154,7 +151,7 @@ eval_list <- cbind(eval_list,"language" = language_fixed[,"language"])
 same_lang_prop <- data.frame()
 for(i in 1:20){
 n_distinct_lang <- eval_list %>% filter(ordner == i) %>% distinct(language) %>% nrow() %>% as.integer()
-same_lang_prop_i <- rep(1/n_distinct_lang, 4) %>% as.data.frame()
+same_lang_prop_i <- rep(n_distinct_lang/4, 4) %>% as.data.frame()
 same_lang_prop <- rbind(same_lang_prop, same_lang_prop_i)
 }
 colnames(same_lang_prop) <- "same_lang_prop"
@@ -178,20 +175,13 @@ unique_languages <- data.frame(ordner = 1:20, as.data.frame(unique_languages))
 survey_full <- merge(survey_full, unique_languages)
 survey_full <- survey_full %>% mutate(same_language = ifelse(language_book == language_recommendation, "same_language", "different_language"))
 
-survey_full %>% filter(unique_languages > 1)  %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + labs(title = "choice behavior when 2+ languages are available")
-
-survey_full %>% filter(distinct_authors == 4 & unique_languages > 1) %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + labs(title = "choice behavior when 2+ languages are available and no same authors")
-
-# Same author
-survey_full$same_author <- ifelse(survey_full$author == survey_full$recommendation_author, "same_author", "different_author")
-
-
-
+survey_full <- survey_full[!duplicated(as.list(survey_full))] %>% as.data.frame()
 ```
 
 # One by one analysis
 
 ```{r}
+
 #1 4 same authors, series, same lang
 #2 2 same authors, all same lang
 #3 2 same authors, book of these diff lang, other two books same lang as main
@@ -244,7 +234,13 @@ survey_full %>% filter(ordner %in% c(4,5,7,10,14,15,16,17,19)) %>% ggplot(aes(sa
 # Language Distribution
 survey_full %>% ggplot(aes(same_language)) + geom_histogram(stat = "count") + facet_wrap(.~same_lang_prop)+labs(title = "language choice behavior by proportion of same language available")
 
+for(i in 1:20){
+  plot_i <- survey_full %>% filter(ordner == i) %>% ggplot(aes(recommendation_title)) + geom_histogram(stat = "count") + labs(title = paste("ordner",i))
+  print(plot_i)
+}
 
+survey_full %>% filter(ordner == 12) %>% ggplot(aes(recommendation_title)) + geom_histogram(stat = "count")
+unique(survey_full$ordner)
 ```
 
 
